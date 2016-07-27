@@ -767,6 +767,36 @@ conditions:
         });
     # WHERE population BETWEEN 999 AND 5000000,
 
+- ``exists()`` Create a condition using ``EXISTS``::
+
+    $subquery = $cities->find()
+		->select(['id'])
+        ->where(function ($exp, $q) {
+			return $exp->equalFields('countries.id', 'cities.country_id');
+        })
+		->andWhere(['population >', 5000000]);
+
+    $query = $countries->find()
+        ->where(function ($exp, $q) use ($subquery) {
+            return $exp->exists($subquery);
+        });
+    # WHERE EXISTS (SELECT id FROM cities WHERE countries.id = cities.country_id AND population > 5000000)
+
+- ``notExists()`` Create a negated condition using ``EXISTS``::
+
+    $subquery = $cities->find()
+		->select(['id'])
+        ->where(function ($exp, $q) {
+			return $exp->equalFields('countries.id', 'cities.country_id');
+        })
+		->andWhere(['population >', 5000000]);
+
+    $query = $countries->find()
+        ->where(function ($exp, $q) use ($subquery) {
+            return $exp->notExists($subquery);
+        });
+    # WHERE NOT EXISTS (SELECT id FROM cities WHERE countries.id = cities.country_id AND population > 5000000)
+
 .. warning::
 
     The field name used in expressions should **never** contain untrusted content.
