@@ -1,5 +1,5 @@
-CounterCache
-############
+CounterCache Behavior
+#####################
 
 .. php:namespace:: Cake\ORM\Behavior
 
@@ -154,5 +154,5 @@ con el mismo código descrito anteriormente.::
 Para terminar borra todas las cachés con ``bin/cake cache clear_all`` y pruébalo.
 
 .. meta::
-    :title lang=es: CounterCache
+    :title lang=es: CounterCache Behavior
     :keywords lang=es: maintenance branch,community interaction,community feature,necessary feature,stable release,ticket system,advanced feature,power users,feature set,chat irc,leading edge,router,new features,members,attempt,development branches,branch development, counter cache
